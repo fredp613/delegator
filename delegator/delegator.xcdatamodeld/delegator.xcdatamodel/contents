@@ -36,13 +36,15 @@
     <entity name="CoreUser" syncable="YES">
         <attribute name="created_on" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notifications" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="tutorial_complete" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="updated_on" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="CoreDecision" positionX="-36" positionY="36" width="128" height="118"/>
         <element name="CoreDocument" positionX="-54" positionY="-9" width="128" height="133"/>
-        <element name="CoreUser" positionX="-18" positionY="63" width="128" height="103"/>
+        <element name="CoreUser" positionX="-18" positionY="63" width="128" height="133"/>
         <element name="CoreOrganization" positionX="-36" positionY="45" width="128" height="148"/>
         <element name="CoreDocumentWorkflow" positionX="-27" positionY="54" width="128" height="148"/>
     </elements>
