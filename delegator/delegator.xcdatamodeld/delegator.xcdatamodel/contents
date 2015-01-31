@@ -1,51 +1,69 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14B25" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="CoreDecision" syncable="YES">
-        <attribute name="created_by" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="created_on" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="decision" optional="YES" attributeType="Integer 32" syncable="YES"/>
-        <attribute name="updated_by" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="updated_on" optional="YES" attributeType="Date" syncable="YES"/>
-    </entity>
-    <entity name="CoreDocument" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CoreDocument" representedClassName="CoreDocument" syncable="YES">
         <attribute name="created_by" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="created_on" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="document_location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="document_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_by" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_on" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="document_workflows" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreDocumentWorkflow" inverseName="document" inverseEntity="CoreDocumentWorkflow" syncable="YES"/>
+        <relationship name="organization" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreOrganization" inverseName="documents" inverseEntity="CoreOrganization" syncable="YES"/>
     </entity>
-    <entity name="CoreDocumentWorkflow" syncable="YES">
+    <entity name="CoreDocumentWorkflow" representedClassName="CoreDocumentWorkflow" syncable="YES">
         <attribute name="created_by" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="created_on" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="delegator" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="decision" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="document_workflow_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="updated_by" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_on" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="document" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreDocument" inverseName="document_workflows" inverseEntity="CoreDocument" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreUser" inverseName="document_workflows" inverseEntity="CoreUser" syncable="YES"/>
     </entity>
-    <entity name="CoreOrganization" syncable="YES">
-        <attribute name="created_by" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="created_on" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="CoreLocation" representedClassName="CoreLocation" syncable="YES">
+        <attribute name="address_line1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_line2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="created_on" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="location_type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="updated_on" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="zip" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreUser" inverseName="locations" inverseEntity="CoreUser" syncable="YES"/>
+    </entity>
+    <entity name="CoreOrganization" representedClassName="CoreOrganization" syncable="YES">
+        <attribute name="created_by" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="created_on" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="organization_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="organization_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="organization_type" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="updated_by" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="updated_on" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="organization_type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="updated_by" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updated_on" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="documents" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreDocument" inverseName="organization" inverseEntity="CoreDocument" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreUser" inverseName="organizations" inverseEntity="CoreUser" syncable="YES"/>
     </entity>
-    <entity name="CoreUser" syncable="YES">
+    <entity name="CoreUser" representedClassName="CoreUser" syncable="YES">
         <attribute name="created_on" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notfiications_on" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="notifications" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="remember" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="tutorial_complete" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="updated_on" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="verified" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="document_workflows" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreDocumentWorkflow" inverseName="user" inverseEntity="CoreDocumentWorkflow" syncable="YES"/>
+        <relationship name="locations" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreLocation" inverseName="user" inverseEntity="CoreLocation" syncable="YES"/>
+        <relationship name="organizations" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreOrganization" inverseName="user" inverseEntity="CoreOrganization" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CoreDecision" positionX="-36" positionY="36" width="128" height="118"/>
-        <element name="CoreDocument" positionX="-54" positionY="-9" width="128" height="133"/>
-        <element name="CoreUser" positionX="-18" positionY="63" width="128" height="133"/>
-        <element name="CoreOrganization" positionX="-36" positionY="45" width="128" height="148"/>
-        <element name="CoreDocumentWorkflow" positionX="-27" positionY="54" width="128" height="148"/>
+        <element name="CoreDocument" positionX="-54" positionY="-9" width="128" height="163"/>
+        <element name="CoreDocumentWorkflow" positionX="-27" positionY="54" width="128" height="178"/>
+        <element name="CoreOrganization" positionX="-36" positionY="45" width="128" height="178"/>
+        <element name="CoreUser" positionX="-18" positionY="63" width="128" height="223"/>
+        <element name="CoreLocation" positionX="-36" positionY="72" width="128" height="208"/>
     </elements>
 </model>
